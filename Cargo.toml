@@ -5,13 +5,18 @@ version = "0.1.0"
 edition = "2024"
 rust-version = "1.95"
 license = "MIT"
-repository = "https://github.com/mkovero/ac2"
+repository = "https://github.com/mkovero/cahal"
 readme = "README.md"
 keywords = ["audio", "coreaudio", "macos", "hal"]
 categories = ["multimedia::audio", "os::macos-apis"]
-# Lives in ac2's workspace until its API settles; it carries every setting itself (nothing
-# `.workspace = true`) so it can move to its own repository unchanged.
-publish = false
+include = ["/src", "/README.md", "/LICENSE"]
+
+# The HAL API exists only on macOS; built for any other target, the docs would show just the
+# pure part.
+[package.metadata.docs.rs]
+default-target = "aarch64-apple-darwin"
+targets = ["aarch64-apple-darwin", "x86_64-apple-darwin"]
+all-features = true
 
 [features]
 default = ["consent"]

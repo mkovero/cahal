@@ -1,5 +1,8 @@
 # cahal
 
+[![crates.io](https://img.shields.io/crates/v/cahal.svg)](https://crates.io/crates/cahal)
+[![docs.rs](https://docs.rs/cahal/badge.svg)](https://docs.rs/cahal)
+
 A small Rust binding to the Core Audio HAL on macOS: devices, their properties and property
 listeners, and **one duplex IOProc per device whose input and output share an exact sample
 index**.
@@ -65,7 +68,16 @@ checked), `ioproc.rs` (create/start/stop/destroy and the trampoline), `listener.
 (register, unregister before free) and `consent.rs` (two AVFoundation calls). Each block
 carries a `// SAFETY:` comment (`clippy::undocumented_unsafe_blocks` is denied).
 
-## Status
+## Requirements
 
-Developed inside [ac2](https://github.com/mkovero/ac2) until its API settles, then moved
-to a repository of its own. MIT licensed.
+macOS (the HAL), Rust 1.95 or later (edition 2024). The `consent` feature links
+AVFoundation; turn off default features to leave it out.
+
+## Users
+
+[ac2](https://github.com/mkovero/ac2), a live dual-channel analyzer for PA tuning, runs its
+macOS audio backend on `cahal`; that is where the crate gets exercised on real interfaces.
+
+## License
+
+MIT, see [LICENSE](LICENSE).
